@@ -1,24 +1,28 @@
-import logo from './logo.svg';
+import { HelmetProvider } from 'react-helmet-async';
+import { HashRouter } from 'react-router-dom';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import ErrorBoundary from './containers/ErrorBoundary/ErrorBoundary';
+import AppRoutes from './routes/AppRoutes/AppRoutes';
 import './App.css';
-
-function App() {
+import { ProductProvider } from './contexts/ProductContext';
+function App () {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ErrorBoundary>
+      <HelmetProvider>
+        <HashRouter>
+          <div className="App">
+            <Header />
+            <main className="container mt-5 pt-4">
+              <ProductProvider>
+                <AppRoutes />
+              </ProductProvider>
+            </main>
+            <Footer />
+          </div>
+        </HashRouter>
+      </HelmetProvider>
+    </ErrorBoundary>
   );
 }
 

@@ -1,0 +1,246 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "The Indian Garage Co - Casual Shirt",
+      "description": "White and teal blue striped casual shirt, has a spread collar, long sleeves, button placket, curved hem, and 1 patch pocket",
+      "imageUrl": "https://assets.myntassets.com/f_webp,dpr_1.5,q_60,w_210,c_limit,fl_progressive/assets/images/10673544/2019/9/24/6b9c7688-7ca2-4d11-9e5b-a3745ecd8f761569310358973-The-Indian-Garage-Co-Men-Shirts-8481569310357131-1.jpg",
+      "thumbnailUrl": "https://assets.myntassets.com/f_webp,dpr_1.5,q_60,w_210,c_limit,fl_progressive/assets/images/10673544/2019/9/24/6b9c7688-7ca2-4d11-9e5b-a3745ecd8f761569310358973-The-Indian-Garage-Co-Men-Shirts-8481569310357131-1.jpg",
+      "imgAltText": "The Indian Garage Co - Casual Shirt",
+      "maxRetailPrice": 900,
+      "category": "Men",
+      "discountApplicable": 14,
+      "added": "4/9/2021",
+      "quantity": 30,
+      "bestSellerRanking": 2,
+      "featured": true,
+      "reviews": [
+        {
+          "id": 1002,
+          "name": "Kevin",
+          "email": "k@l.com",
+          "phone": "97654663",
+          "comment": "amazing!",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "U S Polo Assn Men White Pure Cotton Casual Shirt",
+      "description": "White solid opaque pure cotton casual shirt ,has a button-down collar, button placket, long regular sleeves, curved hem",
+      "imageUrl": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/19446260/2022/9/20/1ce0d1b4-76f4-471d-8cc3-5cf2e153b7d91663652968978-U-S-Polo-Assn-Men-White-Solid-Tailored-Fit-Pure-Cotton-Casua-6.jpg",
+      "thumbnailUrl": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/19446260/2022/9/20/1ce0d1b4-76f4-471d-8cc3-5cf2e153b7d91663652968978-U-S-Polo-Assn-Men-White-Solid-Tailored-Fit-Pure-Cotton-Casua-6.jpg",
+      "imgAltText": "U S Polo Assn Men White Solid Tailored Fit Pure Cotton Casual Shirt",
+      "maxRetailPrice": 2100,
+      "category": "Men",
+      "discountApplicable": 14,
+      "added": "4/9/2021",
+      "quantity": 30,
+      "bestSellerRanking": 3,
+      "featured": true,
+      "reviews": []
+    },
+    {
+      "id": 3,
+      "name": "Men Black Pure Cotton Sustainable Casual Shirt",
+      "description": "Black solid casual shirt, has a spread collar, button placket, 1 pocket, long sleeves, curved hem",
+      "imageUrl": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/2127876/2017/11/23/11511431472633-Roadster-Men-Black-Regular-Fit-Solid-Casual-Shirt-8801511431472500-1.jpg",
+      "thumbnailUrl": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/2127876/2017/11/23/11511431472633-Roadster-Men-Black-Regular-Fit-Solid-Casual-Shirt-8801511431472500-1.jpg",
+      "imgAltText": "Men Black Pure Cotton Sustainable Casual Shirt",
+      "maxRetailPrice": 1299,
+      "category": "Men",
+      "discountApplicable": 14,
+      "added": "4/9/2021",
+      "quantity": 30,
+      "bestSellerRanking": 3,
+      "featured": true,
+      "reviews": []
+    },
+    {
+      "id": 4,
+      "name": "White Mandarin Collar Empire Top",
+      "description": "White regular empire top Solid Mandarin collar, three-quarter, regular sleeves Gathered or pleated detail Woven cotton",
+      "imageUrl": "https://assets.myntassets.com/f_webp,dpr_1.5,q_60,w_210,c_limit,fl_progressive/assets/images/13238794/2021/6/5/c44ab368-359b-4351-a4e2-38013be51e8b1622875534045-Anouk-Women-Tops-751622875533409-1.jpg",
+      "thumbnailUrl": "https://assets.myntassets.com/f_webp,dpr_1.5,q_60,w_210,c_limit,fl_progressive/assets/images/13238794/2021/6/5/c44ab368-359b-4351-a4e2-38013be51e8b1622875534045-Anouk-Women-Tops-751622875533409-1.jpg",
+      "imgAltText": "White Mandarin Collar Empire Top",
+      "maxRetailPrice": 899,
+      "category": "Women",
+      "discountApplicable": 14,
+      "added": "4/9/2021",
+      "quantity": 30,
+      "bestSellerRanking": 3,
+      "featured": true,
+      "reviews": []
+    },
+    {
+      "id": 5,
+      "name": "U.S. Polo Assn - Shirts",
+      "description": "Navy blue solid opaque casual shirt, has a spread collar, button placket, long regular sleeves, curved hem",
+      "imageUrl": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/22550560/2023/3/29/b6ffe222-3718-468c-be25-ae9182395abe1680036140674USPoloAssnMenBlueOpaqueCasualShirt1.jpg",
+      "thumbnailUrl": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/22550560/2023/3/29/b6ffe222-3718-468c-be25-ae9182395abe1680036140674USPoloAssnMenBlueOpaqueCasualShirt1.jpg",
+      "imgAltText": "White Mandarin Collar Empire Top",
+      "maxRetailPrice": 1899,
+      "category": "Men",
+      "discountApplicable": 14,
+      "added": "4/9/2021",
+      "quantity": 30,
+      "bestSellerRanking": 3,
+      "featured": true,
+      "reviews": []
+    },
+    {
+      "id": 6,
+      "name": "U S Polo Assn Men White Cotton Classic Everyday Shirt",
+      "description": "White solid opaque Casual shirt ,has a spread collar, button placket, 1 patch pocket, long regular sleeves, curved hem",
+      "imageUrl": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/20384228/2022/10/29/313dc33f-e18d-4458-ae29-02830a7b3a1b1667048263011-U-S-Polo-Assn-Men-White-Pure-Cotton-Solid-Casual-Shirt-87916-6.jpg",
+      "thumbnailUrl": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/20384228/2022/10/29/313dc33f-e18d-4458-ae29-02830a7b3a1b1667048263011-U-S-Polo-Assn-Men-White-Pure-Cotton-Solid-Casual-Shirt-87916-6.jpg",
+      "imgAltText": "White Mandarin Collar Empire Top",
+      "maxRetailPrice": 1494,
+      "category": "Men",
+      "discountApplicable": 14,
+      "added": "4/9/2021",
+      "quantity": 30,
+      "bestSellerRanking": 3,
+      "featured": true,
+      "reviews": []
+    },
+    {
+      "id": 7,
+      "name": "U S Polo Assn Men Orange Solid Tailored Fit Pure Cotton Casual Shirt",
+      "description": "Orange solid Casual shirt ,has a spread collar, button placket, 1 patch pocket, long regular sleeves, curved hem",
+      "imageUrl": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/20603622/2022/12/5/fbf905d3-810e-4c28-af93-baea9ef9b7e31670224000445-U-S-Polo-Assn-Men-Orange-Solid-Tailored-Fit-Pure-Cotton-Casu-1.jpg",
+      "thumbnailUrl": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/20603622/2022/12/5/fbf905d3-810e-4c28-af93-baea9ef9b7e31670224000445-U-S-Polo-Assn-Men-Orange-Solid-Tailored-Fit-Pure-Cotton-Casu-1.jpg",
+      "imgAltText": "U S Polo Assn Men Orange Solid Tailored Fit",
+      "maxRetailPrice": 1494,
+      "category": "Men",
+      "discountApplicable": 14,
+      "added": "4/9/2021",
+      "quantity": 30,
+      "bestSellerRanking": 3,
+      "featured": true,
+      "reviews": []
+    },
+    {
+      "id": 8,
+      "name": "Blue Print Mandarin Collar Empire Pure Cotton Longline Top",
+      "description": " Mandarin collar,  three-quarter,  cuffed sleeves  Gathered or pleated detail",
+      "imageUrl": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/19524874/2022/8/17/0fb689b3-28b4-4f6a-be08-a2ce9dfedcdc1660715206206QOMNBluePrintMandarinCollarTop1.jpg",
+      "thumbnailUrl": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/19524874/2022/8/17/0fb689b3-28b4-4f6a-be08-a2ce9dfedcdc1660715206206QOMNBluePrintMandarinCollarTop1.jpg",
+      "imgAltText": "Blue Print Mandarin Collar Empire Pure Cotton Longline Top",
+      "maxRetailPrice": 1049,
+      "category": "Women",
+      "discountApplicable": 14,
+      "added": "4/9/2021",
+      "quantity": 30,
+      "bestSellerRanking": 3,
+      "featured": true,
+      "reviews": []
+    },
+    {
+      "id": 9,
+      "name": "Women Navy Blue Printed Top - HERE & NOW",
+      "description": "Navy blue and red printed woven top, has a round neck, sleeveless, button closure",
+      "imageUrl": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/2187783/2021/11/9/de450532-9acd-4039-9e21-4f77569fb01c1636448588262-HERENOW-Women-Navy-Blue-Printed-Top-4911636448587796-1.jpg",
+      "thumbnailUrl": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/2187783/2021/11/9/de450532-9acd-4039-9e21-4f77569fb01c1636448588262-HERENOW-Women-Navy-Blue-Printed-Top-4911636448587796-1.jpg",
+      "imgAltText": "Navy blue and red printed woven top, has a round neck, sleeveless, button closure",
+      "maxRetailPrice": 999,
+      "category": "Women",
+      "discountApplicable": 14,
+      "added": "4/9/2021",
+      "quantity": 30,
+      "bestSellerRanking": 3,
+      "featured": true,
+      "reviews": []
+    },
+    {
+      "id": 10,
+      "name": "Boys Off-White Solid Polo Collar T-shirt with Embroidered Detail",
+      "description": "Off-white solid T-shirt with brand logo embroidered detail, has a polo collar,button closure, and short sleeves",
+      "imageUrl": "https://assets.myntassets.com/f_webp,dpr_1.5,q_60,w_210,c_limit,fl_progressive/assets/images/12955976/2023/5/16/8d1a28c4-e2b7-4ef7-a102-cce0645631b31684226222309UnitedColorsofBenettonBoysOff-WhiteSolidPoloCollarT-shirtwit1.jpg",
+      "thumbnailUrl": "https://assets.myntassets.com/f_webp,dpr_1.5,q_60,w_210,c_limit,fl_progressive/assets/images/12955976/2023/5/16/8d1a28c4-e2b7-4ef7-a102-cce0645631b31684226222309UnitedColorsofBenettonBoysOff-WhiteSolidPoloCollarT-shirtwit1.jpg",
+      "imgAltText": "Navy blue and red printed woven top, has a round neck, sleeveless, button closure",
+      "maxRetailPrice": 599,
+      "category": "Kids",
+      "discountApplicable": 14,
+      "added": "4/9/2021  ",
+      "quantity": 20,
+      "bestSellerRanking": 3,
+      "featured": true,
+      "reviews": []
+    },
+    {
+      "id": 11,
+      "name": "Boys Red Printed Applique Cotton T-shirt",
+      "description": "Red Tshirt for boys Super mario humour and comic printed  Regular length",
+      "imageUrl": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/20927888/2022/11/26/608a825e-46a6-4268-900e-eeeceb3d39ed1669451860270MarksSpencerBoysRedPrintedAppliqueT-shirt1.jpg",
+      "thumbnailUrl": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/20927888/2022/11/26/608a825e-46a6-4268-900e-eeeceb3d39ed1669451860270MarksSpencerBoysRedPrintedAppliqueT-shirt1.jpg",
+      "imgAltText": "Boys Red Printed Applique Cotton T-shirt",
+      "maxRetailPrice": 649,
+      "category": "Kids",
+      "discountApplicable": 14,
+      "added": "4/9/2021  ",
+      "quantity": 20,
+      "bestSellerRanking": 3,
+      "featured": true,
+      "reviews": []
+    },
+    {
+      "id": 12,
+      "name": "Boys Polo Collar Pure Cotton T-shirt - US Polo Assn Kids.",
+      "description": "Red Tshirt for boys Super mario humour and comic printed  Regular length",
+      "imageUrl": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/22655486/2023/4/5/e4e873dc-d379-4f88-8f90-59d185ed2a351680686285843USPoloAssnKidsBrandTapedCottonPoloShirt1.jpg",
+      "thumbnailUrl": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/22655486/2023/4/5/e4e873dc-d379-4f88-8f90-59d185ed2a351680686285843USPoloAssnKidsBrandTapedCottonPoloShirt1.jpg",
+      "imgAltText": "Red Tshirt for boys Super mario humour and comic printed  Regular length",
+      "maxRetailPrice": 825,
+      "category": "Kids",
+      "discountApplicable": 14,
+      "added": "4/9/2021  ",
+      "quantity": 20,
+      "bestSellerRanking": 3,
+      "featured": true,
+      "reviews": []
+    }
+  ],
+  "categories": [
+    {
+      "id": 101,
+      "name": "Men"
+    },
+    {
+      "id": 102,
+      "name": "Women"
+    },
+    {
+      "id": 103,
+      "name": "Kids"
+    }
+  ],
+  "contactData": {
+    "address": "280 ParK Avenue Z,Cross cut Complex, Bangalore, India",
+    "phone": [
+      "(91) 987 654 3210",
+      "(91) 987 654 3211"
+    ],
+    "email": "contact@sparkclothing.com"
+  },
+  "getInTouchData": [
+    {
+      "name": "Arun",
+      "email": "arun@gmail.com",
+      "message": "Awesome website",
+      "id": 1
+    }
+  ],
+  "formdata": [],
+  "reviews": [
+    {
+      "name": "venkat",
+      "email": "venkatch@gmail.com",
+      "message": "Amazing",
+      "rating": "4",
+      "productId": "1",
+      "id": 1
+    }
+  ]
+}

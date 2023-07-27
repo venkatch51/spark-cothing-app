@@ -1,12 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+h4 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold !important;
+}
+p {
+  font-family: 'Poppins', sans-serif;
+}
 .App {
   text-align: center;
 }
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
-
+.navbar-nav li.nav-item a {
+  font-weight: bold;
+  font-size: 18px;
+}
+.carousel-wrap-items img {
+  width: 35% !important;
+  height: 300px;
+}
+form.d-flex.search-placeholder {
+  margin-left: auto;
+  width: 40%;
+}
+.search-icon {
+  position: relative;
+  left: -6%;
+  background-color: grey;
+  font-size: 30px;
+  border: none;
+}
+.carousel-caption.d-none.d-md-block {
+  top: 20%;
+  left: 50%;
+}
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+  background-color: grey;
+  height: 58px !important;
+  border-radius: 2px;
+}
+.categories li.nav-item a.active {
+  background-color: #00ffa49e;
+  border-radius: 2px;
+  border: 1px solid lightslategrey;
+}
+.container-flex{
+  display: flex;
+  flex-direction: column;
+}
+.container-flex .btn-danger {
+  width: fit-content;
+  margin-left: auto;
+}
+.container-flex .filter{
+  margin-left: auto;
+}
+/** Products List **/
+.products-list .card.mb-4 {
+  border: none;
+  text-align: left;
+}
+/** Products List **/
+/** product Details **/
+.prod-details{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.dp-block {
+  display: block !important;
+}
+/** product details **/
+/** Latest Products Home Page **/
+h3.latest-products.text-start {
+  line-height: 24px;
+  padding-bottom: 10px;
+  font-family: inherit;
+}
+.product-price{
+  color: #282c3f;
+  font-weight: 700;
+  font-size: 18px;
+}
+/** Latest Products Home Page **/
+/** About Page Styling start Here **/
+h4.about-first-content {
+  font-family: 'Poppins', sans-serif;
+  font-size: 32px;
+  padding-top: 15px;
+  padding-bottom: 10px;
+}
+p.about-second-content,
+p.about-third-content {
+  font-size: 17px;
+}
+.filtering-button {
+  padding: 6px;
+  margin-bottom: 10px;
+  border-radius: 2px;
+  width: 165px;
+  color: #282c3f;
+  font-weight: 700;
+  border: 1px solid #d4d5d9;
+  margin-left: 10px;
+}
+/** About Page Styling ends Here **/
+/* Footer Styling Starts */
+.footer-icons li i {
+  font-size: 50px;
+  background-color: #FFF;
+}
+.footer-icons li {
+  list-style: none;
+}
+.footer-icons{
+  display: flex;
+  justify-content: space-evenly;
+}
+/* Footer Styling Ends */
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -23,7 +137,9 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
+nav.navbar.navbar-expand-md.navbar-dark.fixed-top {
+  background-color: #000;
+}
 .App-link {
   color: #61dafb;
 }
@@ -34,5 +150,29 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+@media only screen and (min-width: 992px) {
+  .carousel-width {
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+  footer ul.navbar-nav {
+    display: flex;
+    flex-direction: row;
+    padding-left: 35px;
+    justify-content: space-evenly;
+  }
+  footer.bg-dark {
+    padding-bottom: 30px !important;
+    padding-top: 20px !important;
+  }
+  footer p.mt-0.mb-0.text-white {
+    font-weight: bold;
+    padding-top: 15px;
+  }
+  footer .row {
+    display: flex;
+    justify-content: space-between;
   }
 }
