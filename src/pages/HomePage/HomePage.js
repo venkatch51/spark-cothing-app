@@ -9,21 +9,23 @@ import { Helmet } from 'react-helmet-async';
 const HomePage = () => {
   // intialize the items using useReducer Hook
   const [items, itemsDispatch] = useReducer(itemReducer, []);
-
   // useEffect Hook is used to render the data once the component gets loaded
   useEffect(() => {
     // fetching the Latest Products from API with Limit of three items becaouse of carousel
     axios.get('http://localhost:3100/products?_limit=3').then((res) => {
       // console.log(res.data);
+      // disptach the items to reducer
       itemsDispatch({
         type: 'LIST_ITEMS',
         payload: res.data
       });
     });
   }, []);
+  // function to handle view All button click
   const handleClickViewAll = () => {
     // Fetching All the Products from API
     axios.get('http://localhost:3100/products').then((res) => {
+      // disptach the products to the reducer
       itemsDispatch({
         type: 'LIST_ITEMS',
         payload: res.data
@@ -32,14 +34,15 @@ const HomePage = () => {
   };
   return (
     <>
+      {/* page title using Helmet */}
       <Helmet>
         <title>HomePage</title>
       </Helmet>
       <div className="carousel-width">
-        { /* carousel component */ }
+        {/* carousel component */}
         <div id="carouselExampleCaptions" className="carousel slide">
           <div className="carousel-inner">
-            { /* Looping throught the items and displaying it in carousel */}
+            {/* Looping throught the items and displaying it in carousel */}
             {items.map((item, index) => (
               <div
                 className={`carousel-item ${index === 0 ? 'active' : ''}`}
@@ -52,9 +55,13 @@ const HomePage = () => {
                     alt="..."
                   />
                   <div className="carousel-caption d-none d-md-block">
+                    {/* displaying the item name and description */}
                     <h4 className="text-dark">{item.name}</h4>
                     <p className="text-dark">{item.description}</p>
-                    <button data-testid="browse-products" className="btn btn-danger">
+                    <button
+                      data-testid="browse-products"
+                      className="btn btn-danger"
+                    >
                       Browse 1000 Products
                     </button>
                   </div>
@@ -90,10 +97,15 @@ const HomePage = () => {
         </div>
       </div>
       {/* Latest Products Section */}
-      <h3 data-testid="latestproductsheading" className="latest-products text-start">Latest Products</h3>
+      <h3
+        data-testid="latestproductsheading"
+        className="latest-products text-start"
+      >
+        Latest Products
+      </h3>
       <div className="latest-products-section">
         <div className="row">
-          {/* Looping through the fetched items to display the latest products */}
+          {/* Looping through the fetched item)s to display the latest products */}
           {items.map((item) => {
             return (
               <LatestProductsList
@@ -105,7 +117,7 @@ const HomePage = () => {
             );
           })}
         </div>
-        {/* View All */}
+        {/* View All button */}
         <div className="view-all-section pt-4 pb-4">
           <button
             className="btn btn-success text-center"

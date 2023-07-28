@@ -1,13 +1,12 @@
 import React, { useEffect, useContext, useState } from 'react';
 import axios from 'axios';
 import { ProductContext } from '../../../contexts/ProductContext';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const ProductsList = () => {
   const { products, dispatch } = useContext(ProductContext);
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [sortingPreference, setSortingPreference] = useState('lowToHigh');
-  const location = useLocation(); // Get the current location object
   useEffect(() => {
     axios.get('http://localhost:3100/products').then((res) => {
       console.log(res.data);
@@ -21,13 +20,7 @@ const ProductsList = () => {
   useEffect(() => {
     // Sort the products when sortingPreference or products change
     sortProducts();
-    // Update the URL based on the selected sorting preference
-    // Update the URL based on the selected sorting preference
-    const queryParams = new URLSearchParams(location.search);
-    queryParams.set('sort', sortingPreference);
-    const newUrl = `${location.pathname}?${queryParams.toString()}`;
-    window.history.replaceState({}, '', newUrl);
-  }, [sortingPreference, products, location.search]);
+  }, [sortingPreference, products]);
 
   const sortProducts = () => {
     const sortedProducts = [...products];

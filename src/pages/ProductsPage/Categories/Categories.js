@@ -1,15 +1,13 @@
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ProductContext } from '../../../contexts/ProductContext';
 
 const Categories = () => {
   const [currentCategory, setCurrentCategory] = useState('All');
   const { dispatch } = useContext(ProductContext);
-  const location = useLocation(); // Get the current location object
 
   const handleCategoryClick = (category) => {
-    event.preventDefault()
     setCurrentCategory(category);
     switch (category) {
     case 'All':
@@ -55,12 +53,6 @@ const Categories = () => {
     default:
       break;
     }
-
-    // Update the URL when a category link is clicked
-    const queryParams = new URLSearchParams(location.search);
-    queryParams.set('category', category);
-    const newUrl = `${location.pathname}?${queryParams.toString()}`;
-    window.history.replaceState({}, '', newUrl);
   };
   return (
     <div className="categories">

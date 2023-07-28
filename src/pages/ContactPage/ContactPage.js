@@ -3,9 +3,13 @@ import { Helmet } from 'react-helmet-async';
 import contactReducer from '../../reducers/contactReducer';
 import axios from 'axios';
 
+// contact Page Component
 const ContactPage = () => {
+  // State Management using useReducer Hook for Contact Reducer
   const [contactDetails, detailsDispatch] = useReducer(contactReducer, []);
+  // State to Manage Laoding the data
   const [loading, setLoading] = useState(true);
+  // fetch the contact data from server using axios
   useEffect(() => {
     axios.get('http://localhost:3100/contactData').then((res) => {
       detailsDispatch({
@@ -15,6 +19,8 @@ const ContactPage = () => {
       setLoading(false);
     });
   }, []);
+
+  // state Management by useState to handle the Form data
   const [formState, setFormstate] = useState({
     fullName: '',
     Email: '',
@@ -23,48 +29,37 @@ const ContactPage = () => {
     isSaved: false,
     errors: {}
   });
+  // handle the form submission
   const handleSubmit = (event) => {
     event.preventDefault();
-    const errors = {};
-    if (formState.fullName.trim() === '') {
-      errors.fullName = 'Name is required';
-    }
-    if (formState.Email.trim() === '') {
-      errors.Email = 'Email is required';
-    }
-    if (formState.Message.trim() === '') {
-      errors.Message = 'Message is required';
-    }
-    if (Object.keys(errors).length > 0) {
-      setFormstate({ ...formState, errors });
-    } else {
-      axios
-        .post('http://localhost:3100/formdata', formState)
-        .then((res) => {
-          console.log(res);
-          if (res && res.data) {
-            setFormstate({
-              ...formState,
-              isSubmitting: true,
-              isSaved: true
-            });
-          }
-          console.log('Form data submitted');
-        })
-        .catch((error) => {
-          console.log('Error submitting the formdata', error);
+    // submitting the form data
+    axios
+      .post('http://localhost:3100/formdata', formState)
+      .then((res) => {
+        console.log(res);
+        if (res && res.data) {
           setFormstate({
             ...formState,
-            isSubmitting: false,
-            isSaved: false
-          }).finally(() => {
-            console.log('It is over');
+            isSubmitting: true,
+            isSaved: true
           });
+        }
+        console.log('Form data submitted');
+      })
+      // catch the Error is there is any error
+      .catch((error) => {
+        console.log('Error submitting the formdata', error);
+        setFormstate({
+          ...formState,
+          isSubmitting: false,
+          isSaved: false
+        }).finally(() => {
+          console.log('It is over');
         });
-    }
+      });
   };
+  // Handle the input changes in the Form
   const handleChange = (event) => {
-    // console.log(event.target.value)
     // console.log(event.target.name)
     setFormstate({
       ...formState,
@@ -73,11 +68,13 @@ const ContactPage = () => {
   };
   return (
     <div>
+      {/* Page Title */}
       <Helmet>
         <title>ContactPage</title>
       </Helmet>
       <div className="row pt-5 text-start">
         <div className="col-md-6">
+          {/* Contact information */}
           <h3>Contact US</h3>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -88,6 +85,7 @@ const ContactPage = () => {
             pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
             culpa qui officia deserunt mollit anim id est laborum.
           </p>
+          {/* Display contact details when loading is complete */}
           {loading
             ? (
               <div className="text-center">
@@ -115,6 +113,7 @@ const ContactPage = () => {
             )}
         </div>
         <div className="col-md-6">
+          {/* Contact Form */}
           <form className="row g-3" onSubmit={handleSubmit}>
             <div className="col-md-12 text-start">
               <label className="form-label">Name</label>
@@ -126,9 +125,6 @@ const ContactPage = () => {
                 value={formState.fullName}
                 onChange={handleChange}
               />
-              {formState.errors.fullName && (
-                <div className="text-danger">{formState.errors.fullName}</div>
-              )}
             </div>
             <div className="col-md-12 text-start">
               <label className="form-label text-start">Email</label>
@@ -140,9 +136,6 @@ const ContactPage = () => {
                 value={formState.Email}
                 onChange={handleChange}
               />
-              {formState.errors.Email && (
-                <div className="text-danger">{formState.errors.Email}</div>
-              )}
             </div>
             <div className="col-12 text-start">
               <label className="form-label">Message</label>
@@ -154,9 +147,6 @@ const ContactPage = () => {
                 value={formState.Message}
                 onChange={handleChange}
               />
-              {formState.errors.Message && (
-                <div className="text-danger">{formState.errors.Message}</div>
-              )}
             </div>
             <div className="col-12 text-start">
               <div className="form-check">
@@ -177,10 +167,12 @@ const ContactPage = () => {
                   Object.keys(formState.errors).length > 0
                 }
               >
+                {/* Change button text based on form submission status */}
                 {formState.isSubmitting
                   ? 'Submitting... Please wait...'
                   : 'Submit'}
               </button>
+              {/* Display success message if form is submitted */}
               {formState.isSaved && (
                 <div className="alert alert-success">Saved Successfully!</div>
               )}

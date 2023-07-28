@@ -6,6 +6,7 @@ import axios from 'axios';
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const [reviews, setReviews] = useState([]);
   const [reviewData, setReviewData] = useState({
     name: '',
     email: '',
@@ -60,7 +61,11 @@ const ProductDetails = () => {
       setProduct(res.data);
       console.log(product);
     });
+    axios.get('http://localhost:3100/reviews').then((res) => {
+      setReviews(res.data);
+    });
   }, [id]);
+  // ..rest of the component code
   if (!product) {
     return (
       <div className="text-center">
@@ -87,6 +92,14 @@ const ProductDetails = () => {
           >
             Write a review
           </button>
+          {reviews.map((review) => {
+            return (
+              <div key={review.id}>
+                <p>Review Comments</p>
+                <p>{review.name}: {review.message}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
       <div
