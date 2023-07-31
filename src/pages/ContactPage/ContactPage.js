@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer, useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+// import { Helmet } from 'react-helmet-async';
 import contactReducer from '../../reducers/contactReducer';
 import axios from 'axios';
 
@@ -69,9 +69,9 @@ const ContactPage = () => {
   return (
     <div>
       {/* Page Title */}
-      <Helmet>
+      {/* <Helmet>
         <title>ContactPage</title>
-      </Helmet>
+      </Helmet> */}
       <div className="row pt-5 text-start">
         <div className="col-md-6">
           {/* Contact information */}
@@ -116,18 +116,18 @@ const ContactPage = () => {
           {/* Contact Form */}
           <form className="row g-3" onSubmit={handleSubmit}>
             <div className="col-md-12 text-start">
-              <label className="form-label">Name</label>
+              <label htmlFor="exampleInputName" className="form-label">Name</label>
               <input
                 type="name"
                 className="form-control"
-                id="name"
+                id="exampleInputName"
                 name="fullName"
                 value={formState.fullName}
                 onChange={handleChange}
               />
             </div>
             <div className="col-md-12 text-start">
-              <label className="form-label text-start">Email</label>
+              <label htmlFor="inputEmail4" className="form-label text-start">Email</label>
               <input
                 type="email"
                 className="form-control"
@@ -138,7 +138,7 @@ const ContactPage = () => {
               />
             </div>
             <div className="col-12 text-start">
-              <label className="form-label">Message</label>
+              <label htmlFor="inputAddress2" className="form-label">Message</label>
               <textarea
                 type="text"
                 className="form-control"
@@ -162,10 +162,7 @@ const ContactPage = () => {
               <button
                 type="submit"
                 className="btn btn-primary"
-                disabled={
-                  formState.isSubmitting ||
-                  Object.keys(formState.errors).length > 0
-                }
+                disabled={formState.fullName === ''}
               >
                 {/* Change button text based on form submission status */}
                 {formState.isSubmitting

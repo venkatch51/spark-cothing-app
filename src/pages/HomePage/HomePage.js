@@ -3,7 +3,7 @@ import React, { useEffect, useReducer } from 'react';
 import axios from 'axios';
 import itemReducer from '../../reducers/itemReducer';
 import LatestProductsList from './LatestProductsList/LatestProductsList';
-import { Helmet } from 'react-helmet-async';
+// import { Helmet } from 'react-helmet-async';
 
 // HomePage
 const HomePage = () => {
@@ -35,9 +35,9 @@ const HomePage = () => {
   return (
     <>
       {/* page title using Helmet */}
-      <Helmet>
+      {/* <Helmet>
         <title>HomePage</title>
-      </Helmet>
+      </Helmet> */}
       <div className="carousel-width">
         {/* carousel component */}
         <div id="carouselExampleCaptions" className="carousel slide">
