@@ -1,14 +1,14 @@
 import React from 'react';
 import Categories from './Categories/Categories';
 import ProductsList from './ProductsList/ProductsList';
-// import { Helmet } from 'react-helmet-async';
+import { Helmet } from 'react-helmet-async';
 
 const ProductsPage = () => {
   return (
     <>
-      {/* <Helmet>
+      <Helmet>
         <title>ProductsPage</title>
-      </Helmet> */}
+      </Helmet>
       <div>
         <h3 data-testid="productstitle">Products</h3>
         <div className="row">

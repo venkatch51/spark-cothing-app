@@ -1,14 +1,22 @@
 import React, { useEffect, useReducer, useState } from 'react';
 // import { Helmet } from 'react-helmet-async';
 import contactReducer from '../../reducers/contactReducer';
+import { Controller, useForm } from 'react-hook-form';
 import axios from 'axios';
 
 // contact Page Component
 const ContactPage = () => {
+  const { control, handleSubmit, reset } = useForm();
   // State Management using useReducer Hook for Contact Reducer
   const [contactDetails, detailsDispatch] = useReducer(contactReducer, []);
   // State to Manage Laoding the data
   const [loading, setLoading] = useState(true);
+  // State to Manage Form Submission
+  const [formState, setFormState] = React.useState({
+    isSubmitting: false,
+    isError: false,
+    isSaved: false
+  });
   // fetch the contact data from server using axios
   useEffect(() => {
     axios.get('http://localhost:3100/contactData').then((res) => {
@@ -19,57 +27,35 @@ const ContactPage = () => {
       setLoading(false);
     });
   }, []);
-
-  // state Management by useState to handle the Form data
-  const [formState, setFormstate] = useState({
-    fullName: '',
-    Email: '',
-    Message: '',
-    isSubmitting: false,
-    isSaved: false,
-    errors: {}
-  });
   // handle the form submission
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // submitting the form data
-    setFormstate({
+  const onSubmit = async (data) => {
+    console.log('Form submitted', data);
+    setFormState({
       ...formState,
-      isSubmitting: true
+      isSubmitting: true,
+      isError: false,
+      isSaved: false
     });
-    axios
-      .post('http://localhost:3100/formdata', formState)
-      .then((res) => {
-        console.log(res);
-        if (res && res.data) {
-          setFormstate({
-            ...formState,
-            isSubmitting: false,
-            isSaved: true
-          });
-        }
-        console.log('Form data submitted');
-      })
-      // catch the Error is there is any error
-      .catch((error) => {
-        console.log('Error submitting the formdata', error);
-        setFormstate({
-          ...formState,
-          isSubmitting: false,
-          isSaved: false
-        }).finally(() => {
-          console.log('It is over');
-        });
+    try {
+      const response = await axios.post('http://localhost:3100/formdata', data);
+      console.log('Form data submitted', response);
+      setFormState({
+        ...formState,
+        isSubmitting: false,
+        isSaved: true
       });
+      // Reset the form after successful submission
+      reset();
+    } catch (error) {
+      console.log('Error submitting the formdata', error);
+      setFormState({
+        ...formState,
+        isSubmitting: false,
+        isError: true
+      });
+    }
   };
   // Handle the input changes in the Form
-  const handleChange = (event) => {
-    // console.log(event.target.name)
-    setFormstate({
-      ...formState,
-      [event.target.name]: event.target.value
-    });
-  };
   return (
     <div>
       {/* Page Title */}
@@ -118,38 +104,83 @@ const ContactPage = () => {
         </div>
         <div className="col-md-6">
           {/* Contact Form */}
-          <form className="row g-3" onSubmit={handleSubmit}>
+          <form className="row g-3" onSubmit={handleSubmit(onSubmit)}>
             <div className="col-md-12 text-start">
-              <label htmlFor="exampleInputName" className="form-label">Name</label>
-              <input
-                type="name"
-                className="form-control"
-                id="exampleInputName"
+              <label htmlFor="exampleInputName" className="form-label">
+                Name
+              </label>
+              <Controller
+                control={control}
                 name="fullName"
-                value={formState.fullName}
-                onChange={handleChange}
+                defaultValue=""
+                rules={{ required: 'Name is required' }}
+                render={({ field, fieldState }) => (
+                  <>
+                    <input
+                      type="name"
+                      className="form-control"
+                      id="exampleInputName"
+                      {...field}
+                    />
+                    {fieldState.error && (
+                      <span className="text-danger">
+                        {fieldState.error.message}
+                      </span>
+                    )}
+                  </>
+                )}
               />
             </div>
             <div className="col-md-12 text-start">
-              <label htmlFor="inputEmail4" className="form-label text-start">Email</label>
-              <input
-                type="email"
-                className="form-control"
-                id="inputEmail4"
+              <label htmlFor="inputEmail4" className="form-label text-start">
+                Email
+              </label>
+              <Controller
+                control={control}
                 name="Email"
-                value={formState.Email}
-                onChange={handleChange}
+                defaultValue=""
+                rules={{ required: 'Email is required' }}
+                render={({ field, fieldState }) => (
+                  <>
+                    <input
+                      type="email"
+                      className="form-control"
+                      id="inputEmail4"
+                      {...field}
+                    />
+                    {fieldState.error && (
+                      <span className="text-danger">
+                        {fieldState.error.message}
+                      </span>
+                    )}
+                  </>
+                )}
               />
             </div>
             <div className="col-12 text-start">
-              <label htmlFor="inputAddress2" className="form-label">Message</label>
-              <textarea
-                type="text"
-                className="form-control"
-                id="inputAddress2"
+              <label htmlFor="inputAddress2" className="form-label">
+                Message
+              </label>
+              <Controller
+                control={control}
                 name="Message"
-                value={formState.Message}
-                onChange={handleChange}
+                defaultValue=""
+                rules={{ required: 'Message is required' }}
+                render={({ field, fieldState }) => (
+                  <>
+                    <textarea
+                      type="text"
+                      className="form-control"
+                      id="inputAddress2"
+                      {...field}
+                    />
+                    {fieldState.error && (
+                      <span className="text-danger">
+                        {fieldState.error.message}
+                      </span>
+                    )}
+                  </>
+                )}
               />
             </div>
             <div className="col-12 text-start">
@@ -166,16 +197,18 @@ const ContactPage = () => {
               <button
                 type="submit"
                 className="btn btn-primary"
-                disabled={formState.fullName === ''}
+                disabled={false}
               >
                 {/* Change button text based on form submission status */}
-                {formState.isSubmitting
-                  ? 'Submitting... Please wait...'
-                  : 'Submit'}
+                {formState.isSubmitting ? 'Loading...' : 'Submit'}
               </button>
               {/* Display success message if form is submitted */}
               {formState.isSaved && (
                 <div className="alert alert-success">Saved Successfully!</div>
+              )}
+              {/* Display error message if form submission fails */}
+              {formState.isError && (
+                <div className="alert alert-danger">Failed to submit the form.</div>
               )}
             </div>
           </form>

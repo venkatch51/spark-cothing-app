@@ -1,6 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import HomePage from './HomePage';
 import axios from 'axios';
+import { HelmetProvider } from 'react-helmet-async';
+import { MemoryRouter } from 'react-router-dom';
 
 // setting up mock for axios
 // mock a module with automocked version
@@ -84,18 +86,30 @@ describe('HomePage', () => {
     // 2.1 setup mocks for axios (see before describe block)
     // 2.2 resolve the req
     axios.get.mockResolvedValue(mockResponse);
-    render(<HomePage />)
-    const productOneName = await screen.findAllByText('The Indian Garage Co Casual Shirt')
+    render(
+      <HelmetProvider>
+        <MemoryRouter>
+          <HomePage />
+        </MemoryRouter>
+      </HelmetProvider>
+    );
+    const productOneName = await screen.findAllByText(
+      'The Indian Garage Co Casual Shirt'
+    );
     productOneName.forEach((element) => {
-      expect(element).toBeInTheDocument()
-    })
-    const productTwoName = await screen.findAllByText('U S Polo Assn Men White Pure Cotton Casual Shirt')
+      expect(element).toBeInTheDocument();
+    });
+    const productTwoName = await screen.findAllByText(
+      'U S Polo Assn Men White Pure Cotton Casual Shirt'
+    );
     productTwoName.forEach((element) => {
-      expect(element).toBeInTheDocument()
-    })
-    const productThreeName = await screen.findAllByText('Men Black Pure Cotton Sustainable Casual Shirt')
+      expect(element).toBeInTheDocument();
+    });
+    const productThreeName = await screen.findAllByText(
+      'Men Black Pure Cotton Sustainable Casual Shirt'
+    );
     productThreeName.forEach((element) => {
-      expect(element).toBeInTheDocument()
-    })
+      expect(element).toBeInTheDocument();
+    });
   });
 });

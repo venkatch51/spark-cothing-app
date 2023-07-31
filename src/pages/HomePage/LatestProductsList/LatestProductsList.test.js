@@ -40,7 +40,7 @@ describe('LatestProductsList', () => {
     const element = screen.getByText(`INR: ${PRODUCT.maxRetailPrice}`); // i stands for case-insensitive
     expect(element).toBeInTheDocument();
   });
-  it('Should render product iamge correctly', () => {
+  it('Should render product image correctly', () => {
     render(
       <LatestProductsList
         id={PRODUCT.id}

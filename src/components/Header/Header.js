@@ -15,7 +15,7 @@ const Header = () => {
         <div className="container-fluid">
           <a className="navbar-brand">
             {/* Rendering the Logo */}
-            <img src={logo} style={{ width: '50px' }} />
+            <img src={logo} style={{ width: '50px' }} alt='Logo'/>
           </a>
           <button
             className="navbar-toggler"
