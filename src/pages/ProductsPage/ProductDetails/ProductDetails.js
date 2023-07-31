@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 // eslint-disable-next-line react/prop-types
@@ -76,8 +76,13 @@ const ProductDetails = () => {
   return (
     <>
       <div className="text-start pt-5 mt-4 prod-details">
-        <div className="product-image col-md-6">
-          <img src={product.imageUrl} />
+        <div className="product-image col-md-6 product-details-item">
+          <div className="btn btn-success">
+            <Link className="nav-link" to={'/products'}>
+              Back
+            </Link>
+          </div>
+          <img className="product-image-url" src={product.imageUrl} />
         </div>
         <div className="product-desc col-md-6">
           <h4 className="product-title">Name: {product.name}</h4>
@@ -93,12 +98,17 @@ const ProductDetails = () => {
             Write a review
           </button>
           {reviews.map((review) => {
-            return (
-              <div key={review.id}>
-                <p>Review Comments</p>
-                <p>{review.name}: {review.message}</p>
-              </div>
-            );
+            if (review.productId === id) {
+              return (
+                <div key={review.id}>
+                  <p>Review Comments</p>
+                  <p>
+                    {review.name}: {review.message}
+                  </p>
+                </div>
+              );
+            }
+            return undefined
           })}
         </div>
       </div>

@@ -9,7 +9,7 @@ const LatestProductsList = ({ id, name, thumbnailUrl, maxRetailPrice }) => {
       <div className="col-md-4" key={id}>
         <div className="card" style={{ width: '18rem' }}>
           {/* Product Thumbnail URL */}
-          <img src={thumbnailUrl} className="card-img-top" alt="" />
+          <img src={thumbnailUrl} className="card-img-top" alt="Thumbnail Image" />
           <div className="card-body">
             {/* Product Name */}
             <h5 className="card-title">{name}</h5>

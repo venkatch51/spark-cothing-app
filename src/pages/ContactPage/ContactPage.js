@@ -33,6 +33,10 @@ const ContactPage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // submitting the form data
+    setFormstate({
+      ...formState,
+      isSubmitting: true
+    });
     axios
       .post('http://localhost:3100/formdata', formState)
       .then((res) => {
@@ -40,7 +44,7 @@ const ContactPage = () => {
         if (res && res.data) {
           setFormstate({
             ...formState,
-            isSubmitting: true,
+            isSubmitting: false,
             isSaved: true
           });
         }

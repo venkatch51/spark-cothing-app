@@ -1,12 +1,16 @@
 import React, { useEffect, useContext, useState } from 'react';
 import axios from 'axios';
 import { ProductContext } from '../../../contexts/ProductContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const ProductsList = () => {
   const { products, dispatch } = useContext(ProductContext);
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [sortingPreference, setSortingPreference] = useState('lowToHigh');
+  const navigate = useNavigate()
+  const location = useLocation()
+  const queryParams = new URLSearchParams(location.search)
+  console.log(location, navigate, queryParams)
   useEffect(() => {
     axios.get('http://localhost:3100/products').then((res) => {
       console.log(res.data);
@@ -27,15 +31,18 @@ const ProductsList = () => {
 
     switch (sortingPreference) {
     case 'lowToHigh':
+      queryParams.set('sort', 'lowToHigh')
       sortedProducts.sort((a, b) => a.maxRetailPrice - b.maxRetailPrice);
       break;
     case 'highToLow':
+      queryParams.set('sort', 'hightolow')
       sortedProducts.sort((a, b) => b.maxRetailPrice - a.maxRetailPrice);
       break;
     default:
       break;
     }
-
+    const newURL = `${location.pathname}?${queryParams.toString()}`
+    navigate(newURL)
     setFilteredProducts(sortedProducts);
   };
 
