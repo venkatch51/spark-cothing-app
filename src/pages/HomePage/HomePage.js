@@ -56,8 +56,8 @@ const HomePage = () => {
                   />
                   <div className="carousel-caption d-none d-md-block">
                     {/* displaying the item name and description */}
-                    <h4 className="text-dark">{item.name}</h4>
-                    <p className="text-dark">{item.description}</p>
+                    <h4 data-testid="productName" className="text-dark">{item.name}</h4>
+                    <p data-testid="productDesc" className="text-dark">{item.description}</p>
                     <button
                       data-testid="browse-products"
                       className="btn btn-danger"
@@ -120,6 +120,7 @@ const HomePage = () => {
         {/* View All button */}
         <div className="view-all-section pt-4 pb-4">
           <button
+            data-testid="viewBtn"
             className="btn btn-success text-center"
             onClick={handleClickViewAll}
           >

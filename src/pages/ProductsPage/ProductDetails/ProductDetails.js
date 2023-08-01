@@ -44,7 +44,7 @@ const ProductDetails = () => {
     };
 
     const response = await axios.post(
-      `http://localhost:3100/products/${id}/reviews`,
+      'http://localhost:3100/reviews',
       reviewPayload,
       {
         headers: {
