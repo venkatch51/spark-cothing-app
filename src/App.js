@@ -5,7 +5,6 @@ import Footer from './components/Footer/Footer';
 import ErrorBoundary from './containers/ErrorBoundary/ErrorBoundary';
 import AppRoutes from './routes/AppRoutes/AppRoutes';
 import './App.css';
-import { ProductProvider } from './contexts/ProductContext';
 function App () {
   return (
     <ErrorBoundary>
@@ -14,9 +13,7 @@ function App () {
           <div className="App">
             <Header />
             <main className="container mt-5 pt-4">
-              <ProductProvider>
-                <AppRoutes />
-              </ProductProvider>
+              <AppRoutes />
             </main>
             <Footer />
           </div>

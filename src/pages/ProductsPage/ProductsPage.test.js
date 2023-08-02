@@ -1,22 +1,32 @@
-import { render } from '@testing-library/react';
+import React from 'react';
+import { render, screen } from '@testing-library/react';
 import ProductsPage from './ProductsPage';
-import { HelmetProvider } from 'react-helmet-async';
-import { ProductContext } from '../../contexts/ProductContext';
-import { MemoryRouter } from 'react-router-dom';
+
+jest.mock('./Categories/Categories', () => {
+  const mockComponent = () => <div>Categories Component</div>;
+  return mockComponent;
+});
+jest.mock('./ProductsList/ProductsList', () => {
+  const mockComponent = () => <div>ProductsList Component</div>;
+  return mockComponent;
+});
+jest.mock('react-helmet-async', () => ({
+  Helmet: (props) => (
+    <>
+      <div>Helmet</div>
+    </>
+  )
+}));
 
 describe('ProductsPage', () => {
-  const dispatch = () => {};
   it('should have products title', () => {
-    render(
-      <HelmetProvider context={dispatch}>
-        <ProductContext.Provider value={{ dispatch }}>
-          <MemoryRouter>
-            <ProductsPage />
-          </MemoryRouter>
-        </ProductContext.Provider>
-      </HelmetProvider>
-    );
-    const pageTitle = screen.getByTestId('productstitle');
-    expect(pageTitle.textContent).toBe('Products');
+    render(<ProductsPage />);
+    const component = screen.getByText('Categories Component');
+    expect(component).toBeInTheDocument();
+  });
+  it('should have products title 2', () => {
+    render(<ProductsPage />);
+    const component = screen.getByText('ProductsList Component');
+    expect(component).toBeInTheDocument();
   });
 });

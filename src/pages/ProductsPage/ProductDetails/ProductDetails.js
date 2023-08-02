@@ -1,60 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
+import ReviewForm from './ReviewForm/ReviewForm';
 
 // eslint-disable-next-line react/prop-types
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [reviews, setReviews] = useState([]);
-  const [reviewData, setReviewData] = useState({
-    name: '',
-    email: '',
-    message: '',
-    rating: '',
-    isSubmitted: false
-  });
-  const handleSubmit = async (event) => {
-    console.log('Form submitted');
-    event.preventDefault();
-    setReviewData({
-      ...reviewData,
-      isSubmitted: true
-    });
-    try {
-      const response = await submitReview();
-      console.log('Review submitted successfully', response);
-      // Close the modal or do any other actions after successful submission
-    } catch (error) {
-      console.log('Error submitting the review data', error);
-    }
-  };
-  const handleReviewChange = (event) => {
-    setReviewData({
-      ...reviewData,
-      [event.target.name]: event.target.value
-    });
-  };
-  const submitReview = async () => {
-    const reviewPayload = {
-      name: reviewData.name,
-      email: reviewData.email,
-      message: reviewData.message,
-      rating: reviewData.rating
-    };
-
-    const response = await axios.post(
-      'http://localhost:3100/reviews',
-      reviewPayload,
-      {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-    );
-
-    return response.data;
-  };
 
   useEffect(() => {
     axios.get(`http://localhost:3100/products/${id}`).then((res) => {
@@ -132,69 +85,7 @@ const ProductDetails = () => {
               ></button>
             </div>
             <div className="modal-body">
-              <form className="row g-3" onSubmit={handleSubmit}>
-                <div className="col-md-12 text-start">
-                  <label className="form-label">Name</label>
-                  <input
-                    type="name"
-                    className="form-control"
-                    id="name"
-                    name="name"
-                    value={reviewData.name}
-                    onChange={handleReviewChange}
-                  />
-                </div>
-                <div className="col-md-12 text-start">
-                  <label className="form-label text-start">Email</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="inputEmail4"
-                    name="email"
-                    value={reviewData.email}
-                    onChange={handleReviewChange}
-                  />
-                </div>
-                <div className="col-12 text-start">
-                  <label className="form-label">Message</label>
-                  <textarea
-                    type="text"
-                    className="form-control"
-                    id="inputAddress2"
-                    name="message"
-                    value={reviewData.message}
-                    onChange={handleReviewChange}
-                  />
-                </div>
-                <div className="col-12 text-start">
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      id="gridCheck"
-                    />
-                    <label className="form-check-label">Check me out</label>
-                  </div>
-                </div>
-                <div className="col-12 text-start">
-                  <label className="form-label">Rating</label>
-                  <input
-                    type="number"
-                    className="form-control"
-                    id="rating"
-                    min="1"
-                    max="5"
-                    name="rating"
-                    value={reviewData.rating}
-                    onChange={handleReviewChange}
-                  />
-                </div>
-                <div className="col-12 text-start mb-3">
-                  <button type="submit" className="btn btn-primary">
-                    Submit
-                  </button>
-                </div>
-              </form>
+              <ReviewForm productId={id} />
             </div>
             <div className="modal-footer">
               <button

@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer, useState } from 'react';
-// import { Helmet } from 'react-helmet-async';
+import { Helmet } from 'react-helmet-async';
 import contactReducer from '../../reducers/contactReducer';
 import { Controller, useForm } from 'react-hook-form';
 import axios from 'axios';
@@ -59,9 +59,9 @@ const ContactPage = () => {
   return (
     <div>
       {/* Page Title */}
-      {/* <Helmet>
+      <Helmet>
         <title>ContactPage</title>
-      </Helmet> */}
+      </Helmet>
       <div className="row pt-5 text-start">
         <div className="col-md-6">
           {/* Contact information */}
