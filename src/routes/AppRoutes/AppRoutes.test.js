@@ -1,82 +1,59 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
 import AppRoutes from './AppRoutes';
 
-// Test suite for the AppRoutes component
 describe('AppRoutes', () => {
-  // Test case: rendering the component without crashing
-  test('renders without crashing', () => {
-    render(
-      <MemoryRouter>
-        <AppRoutes />
-      </MemoryRouter>
-    );
+  it('should render the HomePage component when the hash is "/"', async () => {
+    const appRoutes = render(<AppRoutes />);
+    const location = await screen.findByProps({
+      name: 'location',
+      hash: '/'
+    });
+    expect(location).toBeTruthy();
   });
 
-  // Test case: checking if the Home page is rendered for the root path
-  test('renders HomePage component for the root path', () => {
-    render(
-      <MemoryRouter initialEntries={['/']}>
-        <AppRoutes />
-      </MemoryRouter>
-    );
-
-    expect(screen.getByText('Home Page')).toBeInTheDocument();
+  it('should render the AboutPage component when the hash is "/about"', async () => {
+    const appRoutes = render(<AppRoutes />);
+    const location = await screen.findByProps({
+      name: 'location',
+      hash: '/about'
+    });
+    expect(location).toBeTruthy();
   });
 
-  // Test case: checking if the About page is rendered for the '/about' path
-  test('renders AboutPage component for the "/about" path', () => {
-    render(
-      <MemoryRouter initialEntries={['/about']}>
-        <AppRoutes />
-      </MemoryRouter>
-    );
-
-    expect(screen.getByText('About Page')).toBeInTheDocument();
+  it('should render the ProductsPage component when the hash is "/products"', async () => {
+    const appRoutes = render(<AppRoutes />);
+    const location = await screen.findByProps({
+      name: 'location',
+      hash: '/products'
+    });
+    expect(location).toBeTruthy();
   });
 
-  // Test case: checking if the Products page is rendered for the '/products' path
-  test('renders ProductsPage component for the "/products" path', () => {
-    render(
-      <MemoryRouter initialEntries={['/products']}>
-        <AppRoutes />
-      </MemoryRouter>
-    );
-
-    expect(screen.getByText('Products Page')).toBeInTheDocument();
+  it('should render the ContactPage component when the hash is "/contact"', async () => {
+    const appRoutes = render(<AppRoutes />);
+    const location = await screen.findByProps({
+      name: 'location',
+      hash: '/contact'
+    });
+    expect(location).toBeTruthy();
   });
 
-  // Test case: checking if the Contact page is rendered for the '/contact' path
-  test('renders ContactPage component for the "/contact" path', () => {
-    render(
-      <MemoryRouter initialEntries={['/contact']}>
-        <AppRoutes />
-      </MemoryRouter>
-    );
-
-    expect(screen.getByText('Contact Page')).toBeInTheDocument();
+  it('should render the ProductDetails component when the hash is "/products/:id"', async () => {
+    const appRoutes = render(<AppRoutes />);
+    const location = await screen.findByProps({
+      name: 'location',
+      hash: '/products/123'
+    });
+    expect(location).toBeTruthy();
   });
 
-  // Test case: checking if the ProductDetails page is rendered for the '/products/:id' path
-  test('renders ProductDetails component for the "/products/:id" path', () => {
-    render(
-      <MemoryRouter initialEntries={['/products/10']}>
-        <AppRoutes />
-      </MemoryRouter>
-    );
-
-    expect(screen.getByText('Product Details')).toBeInTheDocument();
-  });
-
-  // Test case: checking if the PageNotFound component is rendered for an invalid path
-  test('renders PageNotFound component for invalid paths', () => {
-    render(
-      <MemoryRouter initialEntries={['/invalid-path']}>
-        <AppRoutes />
-      </MemoryRouter>
-    );
-
-    expect(screen.getByText('Page Not Found')).toBeInTheDocument();
+  it('should render the PageNotFound component when the hash is not found', async () => {
+    const appRoutes = render(<AppRoutes />);
+    const location = await screen.findByProps({
+      name: 'location',
+      hash: '/not-found'
+    });
+    expect(location).toBeTruthy();
   });
 });

@@ -1,107 +1,102 @@
 import React from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react';
-import axios from 'axios';
+import { render, fireEvent } from '@testing-library/react';
 import ProductsList from './ProductsList';
 import { ProductContext } from '../../../contexts/ProductContext';
+import axios from 'axios';
 
 jest.mock('axios');
 
-const mockProducts = [
-  {
-    id: 1,
-    title: 'Product 1',
-    description: 'Description 1',
-    maxRetailPrice: 100,
-    imageUrl: 'image1.jpg'
-  },
-  {
-    id: 2,
-    title: 'Product 2',
-    description: 'Description 2',
-    maxRetailPrice: 200,
-    imageUrl: 'image2.jpg'
-  }
-];
-
 const mockDispatch = jest.fn();
+const mockNavigate = jest.fn();
+const mockLocation = {
+  pathname: '/products',
+  search: ''
+};
 
 describe('ProductsList', () => {
   beforeEach(() => {
-    axios.get.mockResolvedValue({ data: mockProducts });
-  });
-
-  afterEach(() => {
     jest.clearAllMocks();
   });
 
-  it('updates sorting preference when sort by select element is changed', async () => {
+  it('renders correctly with initial state', () => {
     const { getByLabelText } = render(
-      <ProductContext.Provider value={{ products: mockProducts, dispatch: mockDispatch }}>
-        <ProductsList />
+      <ProductContext.Provider value={{ products: [], dispatch: mockDispatch }}>
+        <ProductsList navigate={mockNavigate} location={mockLocation} />
       </ProductContext.Provider>
     );
-    await waitFor(() => expect(axios.get).toHaveBeenCalledTimes(1));
-    const sortBySelectElement = getByLabelText('Sort by:');
-    expect(sortBySelectElement.value).toBe('lowToHigh');
-    fireEvent.change(sortBySelectElement, { target: { value: 'highToLow' } });
-    expect(sortBySelectElement.value).toBe('highToLow');
+
+    expect(getByLabelText('Sort by:').value).toBe('lowToHigh');
   });
 
-  it('renders products list', async () => {
-    const { getByText } = render(
-      <ProductContext.Provider value={{ products: mockProducts, dispatch: mockDispatch }}>
-        <ProductsList />
+  it('fetches products and dispatches correct action on mount', async () => {
+    axios.get.mockResolvedValueOnce({ data: ['product1', 'product2'] });
+    render(
+      <ProductContext.Provider value={{ products: [], dispatch: mockDispatch }}>
+        <ProductsList navigate={mockNavigate} location={mockLocation} />
       </ProductContext.Provider>
     );
 
-    await waitFor(() => expect(axios.get).toHaveBeenCalledTimes(1));
-
-    expect(getByText('Product 1')).toBeInTheDocument();
-    expect(getByText('Description 1')).toBeInTheDocument();
-    expect(getByText('price: 100INR')).toBeInTheDocument();
-
-    expect(getByText('Product 2')).toBeInTheDocument();
-    expect(getByText('Description 2')).toBeInTheDocument();
-    expect(getByText('price: 200INR')).toBeInTheDocument();
+    expect(axios.get).toHaveBeenCalledWith('http://localhost:3100/products');
+    await new Promise((resolve) => setImmediate(resolve));
+    expect(mockDispatch).toHaveBeenCalledWith({
+      type: 'LIST_PRODUCTS',
+      payload: ['product1', 'product2']
+    });
   });
 
-  it('sorts products by price low to high', async () => {
-    const { getByText, getByLabelText } = render(
-      <ProductContext.Provider value={{ products: mockProducts, dispatch: mockDispatch }}>
-        <ProductsList />
+  it('updates sortingPreference state on sorting select change', () => {
+    const { getByLabelText, rerender } = render(
+      <ProductContext.Provider value={{ products: [], dispatch: mockDispatch }}>
+        <ProductsList navigate={mockNavigate} location={mockLocation} />
       </ProductContext.Provider>
     );
-
-    await waitFor(() => expect(axios.get).toHaveBeenCalledTimes(1));
-
-    fireEvent.change(getByLabelText('Sort by:'), { target: { value: 'lowToHigh' } });
-
-    expect(getByText('Product 1')).toBeInTheDocument();
-    expect(getByText('Description 1')).toBeInTheDocument();
-    expect(getByText('price: 100INR')).toBeInTheDocument();
-
-    expect(getByText('Product 2')).toBeInTheDocument();
-    expect(getByText('Description 2')).toBeInTheDocument();
-    expect(getByText('price: 200INR')).toBeInTheDocument();
-  });
-
-  it('sorts products by price high to low', async () => {
-    const { getByText, getByLabelText } = render(
-      <ProductContext.Provider value={{ products: mockProducts, dispatch: mockDispatch }}>
-        <ProductsList />
-      </ProductContext.Provider>
-    );
-
-    await waitFor(() => expect(axios.get).toHaveBeenCalledTimes(1));
 
     fireEvent.change(getByLabelText('Sort by:'), { target: { value: 'highToLow' } });
+    rerender(
+      <ProductContext.Provider value={{ products: [], dispatch: mockDispatch }}>
+        <ProductsList navigate={mockNavigate} location={mockLocation} />
+      </ProductContext.Provider>
+    );
+    expect(getByLabelText('Sort by:').value).toBe('highToLow');
+  });
 
-    expect(getByText('Product 2')).toBeInTheDocument();
-    expect(getByText('Description 2')).toBeInTheDocument();
-    expect(getByText('price: 200INR')).toBeInTheDocument();
+  it('calls handleSortingChange with correct event on sorting select change', () => {
+    const handleSortingChange = jest.spyOn(
+      ProductsList.prototype,
+      'handleSortingChange'
+    );
+    const { getByLabelText } = render(
+      <ProductContext.Provider value={{ products: [], dispatch: mockDispatch }}>
+        <ProductsList navigate={mockNavigate} location={mockLocation} />
+      </ProductContext.Provider>
+    );
 
-    expect(getByText('Product 1')).toBeInTheDocument();
-    expect(getByText('Description 1')).toBeInTheDocument();
-    expect(getByText('price: 100INR')).toBeInTheDocument();
+    fireEvent.change(getByLabelText('Sort by:'), { target: { value: 'highToLow' } });
+    expect(handleSortingChange).toHaveBeenCalledWith(
+      expect.objectContaining({ target: { value: 'highToLow' } })
+    );
+  });
+
+  it('sorts products correctly on sortProducts call', () => {
+    const products = [
+      { id: 1, maxRetailPrice: 100 },
+      { id: 2, maxRetailPrice: 200 },
+      { id: 3, maxRetailPrice: 300 }
+    ];
+    const { getByLabelText, getAllByTestId } = render(
+      <ProductContext.Provider value={{ products, dispatch: mockDispatch }}>
+        <ProductsList navigate={mockNavigate} location={mockLocation} />
+      </ProductContext.Provider>
+    );
+
+    fireEvent.change(getByLabelText('Sort by:'), { target: { value: 'highToLow' } });
+    expect(getAllByTestId('product-price')[0].textContent).toBe('300INR');
+    expect(getAllByTestId('product-price')[1].textContent).toBe('200INR');
+    expect(getAllByTestId('product-price')[2].textContent).toBe('100INR');
+
+    fireEvent.change(getByLabelText('Sort by:'), { target: { value: 'lowToHigh' } });
+    expect(getAllByTestId('product-price')[0].textContent).toBe('100INR');
+    expect(getAllByTestId('product-price')[1].textContent).toBe('200INR');
+    expect(getAllByTestId('product-price')[2].textContent).toBe('300INR');
   });
 });
