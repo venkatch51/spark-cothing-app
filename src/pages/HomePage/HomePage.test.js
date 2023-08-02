@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import HomePage from './HomePage';
 import axios from 'axios';
 import { HelmetProvider } from 'react-helmet-async';
@@ -8,6 +8,17 @@ import { MemoryRouter } from 'react-router-dom';
 jest.mock('axios');
 
 describe('HomePage', () => {
+  it('fetches all products and dispatches correct action on handleClickViewAll', async () => {
+    axios.get
+      .mockResolvedValueOnce({ data: ['product1', 'product2'] })
+      .mockResolvedValueOnce({ data: ['product1', 'product2', 'product3'] });
+    const { getByText } = render(<HomePage />);
+
+    fireEvent.click(getByText('View All'));
+    expect(axios.get).toHaveBeenCalledWith('http://localhost:3100/products');
+    await new Promise((resolve) => setImmediate(resolve));
+    expect(getByText('product3')).toBeInTheDocument();
+  });
   it('[MOCKING]: fetches carousel items via rest api call', async () => {
     // 1. prepare mock response
     const mockResponse = {

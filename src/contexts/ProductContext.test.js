@@ -1,69 +1,55 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { ProductProvider, ProductContext } from './ProductProvider';
-import productReducer from '../reducers/productReducer';
+import React, { useContext } from 'react';
+import { render, fireEvent } from '@testing-library/react';
+import { ProductContext, ProductProvider } from './ProductContext';
 
-// Test suite for the ProductProvider component
-describe('ProductProvider', () => {
-  // Test case: rendering the component without crashing
-  test('renders without crashing', () => {
-    render(
+const TestComponent = () => {
+  const { products, dispatch } = useContext(ProductContext);
+
+  const handleAddProduct = () => {
+    dispatch({ type: 'ADD_PRODUCT', payload: 'product1' });
+  };
+
+  return (
+    <>
+      <ul>
+        {products.map((product) => (
+          <li key={product}>{product}</li>
+        ))}
+      </ul>
+      <button onClick={handleAddProduct}>Add Product</button>
+    </>
+  );
+};
+
+describe('ProductContext', () => {
+  it('renders children correctly', () => {
+    const { getByText } = render(
       <ProductProvider>
-        <div>Child component</div>
+        <TestComponent />
       </ProductProvider>
     );
+
+    expect(getByText('Add Product')).toBeInTheDocument();
   });
 
-  // Test case: checking if the context provider value is correct
-  test('provides the correct context value', () => {
-    const mockProducts = [{ id: 1, name: 'Product 1' }, { id: 2, name: 'Product 2' }];
-    const { container } = render(
+  it('provides correct initial value for products and dispatch', () => {
+    const { queryByText } = render(
       <ProductProvider>
-        <ProductContext.Consumer>
-          {(contextValue) => (
-            <>
-              <div data-testid="products">{JSON.stringify(contextValue.products)}</div>
-              <div data-testid="dispatch">{typeof contextValue.dispatch}</div>
-            </>
-          )}
-        </ProductContext.Consumer>
+        <TestComponent />
       </ProductProvider>
     );
 
-    // Check if the products value in context is an empty array by default
-    expect(screen.getByTestId('products')).toHaveTextContent('[]');
+    expect(queryByText('product1')).not.toBeInTheDocument();
+  });
 
-    // Mock dispatch action to update the products value in context
-    const mockDispatch = jest.fn((action) => {
-      if (action.type === 'ADD_PRODUCT') {
-        return [...mockProducts];
-      }
-    });
-
-    // Re-render the component with the mock dispatch function
-    render(
+  it('updates products state correctly on dispatch', () => {
+    const { getByText, queryByText } = render(
       <ProductProvider>
-        <ProductContext.Consumer>
-          {(contextValue) => (
-            <>
-              <div data-testid="products">{JSON.stringify(contextValue.products)}</div>
-              <div data-testid="dispatch">{typeof contextValue.dispatch}</div>
-            </>
-          )}
-        </ProductContext.Consumer>
-      </ProductProvider>,
-      { container }
+        <TestComponent />
+      </ProductProvider>
     );
 
-    // Check if the dispatch function in context is of type function
-    expect(screen.getByTestId('dispatch')).toHaveTextContent('function');
-
-    // Trigger a dispatch action to update the products value in context
-    const action = { type: 'ADD_PRODUCT', payload: { id: 1, name: 'Product 1' } };
-    const contextValue = { products: [], dispatch: mockDispatch };
-    productReducer(contextValue.products, action);
-
-    // Check if the products value in context is updated correctly after dispatch
-    expect(screen.getByTestId('products')).toHaveTextContent(JSON.stringify(mockProducts));
+    fireEvent.click(getByText('Add Product'));
+    expect(queryByText('product1')).toBeInTheDocument();
   });
 });
