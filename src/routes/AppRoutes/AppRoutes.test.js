@@ -1,10 +1,18 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import AppRoutes from './AppRoutes';
+import { Route, Routes } from 'react-router-dom';
+import HomePage from '../../pages/HomePage/HomePage';
 
 describe('AppRoutes', () => {
   it('should render the HomePage component when the hash is "/"', async () => {
-    const appRoutes = render(<AppRoutes />);
+    render(
+      <AppRoutes>
+        <Routes>
+          <Route path="/" element={<HomePage />}></Route>
+        </Routes>
+      </AppRoutes>
+    );
     const location = await screen.findByProps({
       name: 'location',
       hash: '/'

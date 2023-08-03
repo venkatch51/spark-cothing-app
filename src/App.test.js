@@ -3,12 +3,22 @@ import { render, screen } from '@testing-library/react';
 import App from './App';
 
 // Mocking child components to avoid external dependencies
-jest.mock('./components/Header/Header', () => () => <div data-testid="header">Header Component</div>);
-jest.mock('./components/Footer/Footer', () => () => <div data-testid="footer">Footer Component</div>);
-jest.mock('./containers/ErrorBoundary/ErrorBoundary', () => ({ children }) => (
-  <div data-testid="error-boundary">{children}</div>
-));
-jest.mock('./routes/AppRoutes/AppRoutes', () => () => <div data-testid="app-routes">AppRoutes Component</div>);
+jest.mock('./components/Header/Header', () => {
+  const mockComponent = () => <div data-testid="header">Header Component</div>
+  return mockComponent
+});
+jest.mock('./components/Footer/Footer', () => {
+  const mockComponent = () => <div data-testid="footer">Footer Component</div>
+  return mockComponent
+});
+jest.mock('./containers/ErrorBoundary/ErrorBoundary', () => {
+  const mockComponent = ({ children }) => <div data-testid="error-boundary">{children}</div>
+  return mockComponent
+});
+jest.mock('./routes/AppRoutes/AppRoutes', () => {
+  const mockComponent = () => <div data-testid="app-routes">AppRoutes Component</div>
+  return mockComponent
+});
 
 // Test suite for the App component
 describe('App', () => {

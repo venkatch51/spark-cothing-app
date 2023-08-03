@@ -1,16 +1,17 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 
 const ReviewForm = ({ productId }) => {
   const { register, handleSubmit, setValue, formState: { errors, isSubmitted } } = useForm();
-
+  const [isSuccess, setIsSuccess] = useState(false);
   const onSubmit = async (data) => {
     try {
       const response = await submitReview(data);
       console.log('Review submitted successfully', response);
       // Close the modal or do any other actions after successful submission
+      setIsSuccess(true)
     } catch (error) {
       console.log('Error submitting the review data', error);
     }
@@ -25,7 +26,7 @@ const ReviewForm = ({ productId }) => {
     };
 
     const response = await axios.post(
-      `http://localhost:3100/reviews/${productId}`,
+      'http://localhost:3100/reviews',
       reviewPayload,
       {
         headers: {
@@ -45,9 +46,10 @@ const ReviewForm = ({ productId }) => {
   return (
     <form className="row g-3" onSubmit={handleSubmit(onSubmit)}>
       <div className="col-md-12 text-start">
-        <label className="form-label">Name</label>
+        <label htmlFor="exampleInputName" className="form-label">Name</label>
         <input
           type="text"
+          id="exampleInputName"
           className="form-control"
           {...register('name', { required: 'Name is required' })}
           disabled={isSubmitted}
@@ -55,9 +57,10 @@ const ReviewForm = ({ productId }) => {
         {errors.name && <div className="invalid-feedback">{errors.name.message}</div>}
       </div>
       <div className="col-md-12 text-start">
-        <label className="form-label text-start">Email</label>
+        <label htmlFor="exampleInputEmail" className="form-label text-start">Email</label>
         <input
           type="email"
+          id="exampleInputEmail"
           className="form-control"
           {...register('email', {
             required: 'Email is required',
@@ -71,9 +74,10 @@ const ReviewForm = ({ productId }) => {
         {errors.email && <div className="invalid-feedback">{errors.email.message}</div>}
       </div>
       <div className="col-12 text-start">
-        <label className="form-label">Message</label>
+        <label htmlFor="exampleInputMessage" className="form-label">Message</label>
         <textarea
           className="form-control"
+          id="exampleInputMessage"
           {...register('message', { required: 'Message is required' })}
           disabled={isSubmitted}
         />
@@ -92,9 +96,10 @@ const ReviewForm = ({ productId }) => {
         </div>
       </div>
       <div className="col-12 text-start">
-        <label className="form-label">Rating</label>
+        <label htmlFor="exampleInputRating" className="form-label">Rating</label>
         <input
           type="number"
+          id="exampleInputRating"
           className="form-control"
           {...register('rating', {
             required: 'Rating is required',
@@ -112,10 +117,15 @@ const ReviewForm = ({ productId }) => {
         {errors.rating && <div className="invalid-feedback">{errors.rating.message}</div>}
       </div>
       <div className="col-12 text-start mb-3">
-        <button type="submit" className="btn btn-primary" disabled={isSubmitted}>
+        <button data-testid="submit" type="submit" className="btn btn-primary" disabled={isSubmitted}>
           Submit
         </button>
       </div>
+      {isSuccess && ( // Conditional rendering of success message
+        <div className="col-12 text-start">
+          <p>Review submitted successfully</p>
+        </div>
+      )}
     </form>
   );
 };
